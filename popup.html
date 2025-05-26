@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explaina - Explain a word with AI</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <main class="w-[500px] h-full min-h-[500px] rounded-lg bg-card shadow-lg">
+        <div class="bg-[#06b6b5] flex flex-col space-y-1.5 p-6 text-white">
+            <div class="flex justify-between items-center">
+                <h1 class="flex text-2xl font-semibold leading-none tracking-tight items-center gap-2">
+                    Explaina - Explain a word with AI
+                </h1>
+            </div>
+            <p id="asd" class="text-white/80 text-sm">
+                Explaina is an AI-powered tool designed to help you understand and explain complex terms effortlessly.
+                Simply select a word or phrase on any webpage, and Explaina provides a concise, easy-to-understand
+                explanation by analyzing the context of the page. Perfect for students, professionals, and lifelong
+                learners looking to quickly grasp new concepts.
+            </p>
+        </div>
+        <form id="form" class="space-y-4 p-4">
+            <textarea id="input" rows="4" cols="40"
+                class="w-full rounded-md border border-gray-300 bg-background p-2 text-base ring-offset-background placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
+                placeholder="Enter or paste a technical term" class="flex-1"></textarea>
+            <button id="explain-button"
+                class="p-2 w-full disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer rounded-md bg-[#06b6b5] text-white">
+                <span id="explain-text">
+                    Explain
+                </span>
+                <div class="hidden" id="loading-spinner">
+                    <svg class="animate-spin mx-auto h-5 w-5 text-gray-600" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+                        </circle>
+                        <path class="opacity-75" fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                        </path>
+                    </svg>
+                </div>
+            </button>
+            </button>
+            <p id="context" class="hidden">
+            </p>
+            <p id="output" class="text-wrap hidden overflow-scroll max-h-[220px] h-full">
+            </p>
+            <p id="error-message" class="hidden text-red-600 text-xs">
+            </p>
+        </form>
+        <footer class="text-xs flex items-center p-6 pt-0 text-gray-500 justify-between">
+            <span>Select text on any webpage and right-click to explain</span>
+        </footer>
+    </main>
+    <script src="popup.js"></script>
+</body>
+
+</html>
