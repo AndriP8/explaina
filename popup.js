@@ -48,15 +48,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         output.textContent = "";
         output.classList.remove("hidden");
 
-        const explanation = await fetch("http://localhost:3001/api/explain", {
-          method: "POST",
-          body: JSON.stringify({
-            value: input.value,
-            bodyText: context.textContent || contextResult.bodyText,
-            url: contextResult.url,
-            title: contextResult.title,
-          }),
-        })
+        const explanation = await fetch(
+          "https://explaina-server-production.up.railway.app/api/explain",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              value: input.value,
+              bodyText: context.textContent || contextResult.bodyText,
+              url: contextResult.url,
+              title: contextResult.title,
+            }),
+          },
+        )
           .then((res) => res.json())
           .catch((error) => {
             errorMessage.textContent = error.message;
