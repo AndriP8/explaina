@@ -1,1 +1,14 @@
 @import "tailwindcss";
+@theme {
+	--color-card: #ffffff;
+	--color-background: #ffffff;
+	--color-primary: #06b6b5;
+	--color-primary-foreground: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-card: #1f2937;
+		--color-background: #111827;
+	}
+}

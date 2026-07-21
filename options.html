@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Explaina - Settings</title>
+		<link rel="stylesheet" href="index.css">
+	</head>
+
+	<body class="bg-background">
+		<main class="max-w-lg mx-auto my-8 p-6 rounded-lg shadow-lg bg-card">
+			<h1 class="text-2xl font-semibold mb-6 dark:text-gray-100">
+				Explaina Settings
+			</h1>
+
+			<form id="settings-form" class="space-y-6">
+				<div class="space-y-2">
+					<label
+						for="max-context"
+						class="block text-sm font-medium dark:text-gray-200"
+					>
+						Max context characters: <span id="max-context-value">2000</span>
+					</label>
+					<input
+						type="range"
+						id="max-context"
+						min="500"
+						max="5000"
+						step="100"
+						value="2000"
+						class="w-full accent-primary cursor-pointer"
+					>
+				</div>
+
+				<hr class="border-gray-300 dark:border-gray-600">
+
+				<div class="space-y-2">
+					<h2 class="text-sm font-medium dark:text-gray-200">History</h2>
+					<p class="text-xs text-gray-500 dark:text-gray-400">
+						Clear all saved explanation history.
+					</p>
+					<button
+						type="button"
+						id="clear-history"
+						class="px-4 py-2 text-sm rounded-md bg-red-600 text-white hover:bg-red-700 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+					>
+						Clear History
+					</button>
+					<span id="history-status" class="text-xs text-gray-500 ml-2"></span>
+				</div>
+
+				<hr class="border-gray-300 dark:border-gray-600">
+
+				<div class="space-y-2">
+					<p class="text-xs text-gray-500 dark:text-gray-400">
+						Version 1.0 &middot;
+						<button
+							type="button"
+							id="open-popup"
+							class="text-primary hover:underline cursor-pointer bg-transparent border-none p-0 text-xs"
+						>
+							Open popup
+						</button>
+					</p>
+				</div>
+			</form>
+
+			<div id="save-status" class="mt-4 text-sm text-green-600 hidden"></div>
+		</main>
+
+		<script src="dist/options.js"></script>
+	</body>
+</html>

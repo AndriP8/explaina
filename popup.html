@@ -1,61 +1,337 @@
 <!DOCTYPE html>
-<html>
+<html class="dark" lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Explaina - Explain with AI</title>
+		<link rel="stylesheet" href="index.css">
+	</head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explaina - Explain a word with AI</title>
-    <link rel="stylesheet" href="index.css">
-</head>
+	<body class="bg-[#0a0a0a] text-gray-100">
+		<main class="w-[420px] min-h-[400px] bg-[#111111] flex flex-col">
+			<!-- Header -->
+			<header
+				class="flex items-center justify-between px-4 py-3 border-b border-gray-800"
+			>
+				<div class="flex items-center gap-2">
+					<!-- Sparkles/Logo Icon -->
+					<svg
+						class="w-5 h-5 text-[#06b6d4]"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+					>
+						<title>Logo icon</title>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+						></path>
+					</svg>
+					<span class="font-semibold text-gray-100">Explaina</span>
+					<span
+						class="px-1.5 py-0.5 text-xs font-medium bg-[#06b6d4]/20 text-[#06b6d4] rounded"
+						>AI</span
+					>
+				</div>
+				<div class="flex items-center gap-2">
+					<!-- Book/History Icon -->
+					<button
+						type="button"
+						id="history-btn"
+						class="p-1.5 text-gray-400 hover:text-gray-200 transition-colors"
+						title="History"
+					>
+						<svg
+							class="w-4 h-4"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<title>History Icon</title>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+							></path>
+						</svg>
+					</button>
+					<!-- External Link Icon -->
+					<a
+						href="options.html"
+						target="_blank"
+						class="p-1.5 text-gray-400 hover:text-gray-200 transition-colors"
+						title="Settings"
+					>
+						<svg
+							class="w-4 h-4"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<title>External link icon</title>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+							></path>
+						</svg>
+					</a>
+				</div>
+			</header>
 
-<body>
-    <main class="w-[500px] h-full min-h-[500px] rounded-lg bg-card shadow-lg">
-        <div class="bg-[#06b6b5] flex flex-col space-y-1.5 p-6 text-white">
-            <div class="flex justify-between items-center">
-                <h1 class="flex text-2xl font-semibold leading-none tracking-tight items-center gap-2">
-                    Explaina - Explain a word with AI
-                </h1>
-            </div>
-            <p id="asd" class="text-white/80 text-sm">
-                Explaina is an AI-powered tool designed to help you understand and explain complex terms effortlessly.
-                Simply select a word or phrase on any webpage, and Explaina provides a concise, easy-to-understand
-                explanation by analyzing the context of the page. Perfect for students, professionals, and lifelong
-                learners looking to quickly grasp new concepts.
-            </p>
-        </div>
-        <form id="form" class="space-y-4 p-4">
-            <textarea id="input" rows="4" cols="40"
-                class="w-full rounded-md border border-gray-300 bg-background p-2 text-base ring-offset-background placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
-                placeholder="Enter or paste a technical term" class="flex-1"></textarea>
-            <button id="explain-button"
-                class="p-2 w-full disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer rounded-md bg-[#06b6b5] text-white">
-                <span id="explain-text">
-                    Explain
-                </span>
-                <div class="hidden" id="loading-spinner">
-                    <svg class="animate-spin mx-auto h-5 w-5 text-gray-600" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
-                        </circle>
-                        <path class="opacity-75" fill="currentColor"
-                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
-                        </path>
-                    </svg>
-                </div>
-            </button>
-            </button>
-            <p id="context" class="hidden">
-            </p>
-            <p id="output" class="text-wrap hidden overflow-scroll max-h-[220px] h-full">
-            </p>
-            <p id="error-message" class="hidden text-red-600 text-xs">
-            </p>
-        </form>
-        <footer class="text-xs flex items-center p-6 pt-0 text-gray-500 justify-between">
-            <span>Select text on any webpage and right-click to explain</span>
-        </footer>
-    </main>
-    <script src="popup.js"></script>
-</body>
+			<!-- Input Section -->
+			<div class="p-4 space-y-3">
+				<div class="relative">
+					<!-- Search Icon -->
+					<svg
+						class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+						aria-hidden="true"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+						></path>
+					</svg>
+					<!-- Input (single line for search-style UI) -->
+					<input
+						id="input"
+						type="text"
+						class="w-full pl-10 pr-10 py-2.5 bg-[#1a1a1a] border border-gray-700 rounded-lg text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:border-[#06b6d4] focus:ring-1 focus:ring-[#06b6d4] transition-colors"
+						placeholder="Enter a word or phrase to explain..."
+					>
+					<!-- Clear Button -->
+					<button
+						type="button"
+						id="clear-btn"
+						class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
+					>
+						<svg
+							class="w-4 h-4"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M6 18L18 6M6 6l12 12"
+							></path>
+						</svg>
+					</button>
+				</div>
 
+				<!-- Explain Button -->
+				<button
+					type="button"
+					id="explain-button"
+					class="w-full py-2.5 px-4 bg-[#06b6d4] hover:bg-[#0891b2] disabled:bg-gray-700 disabled:cursor-not-allowed rounded-lg text-sm font-medium text-white flex items-center justify-center gap-2 transition-colors"
+				>
+					<svg
+						id="button-icon"
+						class="w-4 h-4"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+						aria-hidden="true"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M13 10V3L4 14h7v7l9-11h-7z"
+						></path>
+					</svg>
+					<span id="explain-text">Explain</span>
+					<div id="loading-spinner" class="hidden">
+						<svg
+							class="animate-spin h-4 w-4 text-white"
+							fill="none"
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+						>
+							<circle
+								class="opacity-25"
+								cx="12"
+								cy="12"
+								r="10"
+								stroke="currentColor"
+								stroke-width="4"
+							></circle>
+							<path
+								class="opacity-75"
+								fill="currentColor"
+								d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+							></path>
+						</svg>
+					</div>
+				</button>
+			</div>
+
+			<!-- Result Section -->
+			<div id="result-section" class="hidden flex-1 px-4 pb-4 overflow-auto">
+				<!-- Word Title & Actions -->
+				<div class="flex items-start justify-between mb-3">
+					<div class="flex items-center gap-2 flex-wrap">
+						<h2
+							id="result-title"
+							class="text-lg font-semibold text-gray-100"
+							aria-live="polite"
+						>
+							&nbsp;
+						</h2>
+						<span
+							id="result-category"
+							class="px-2 py-0.5 text-xs font-medium bg-[#06b6d4]/20 text-[#06b6d4] rounded-full"
+						></span>
+					</div>
+					<div class="flex items-center gap-1">
+						<!-- Copy Button -->
+						<button
+							type="button"
+							id="copy-btn"
+							class="p-1.5 text-gray-400 hover:text-gray-200 transition-colors"
+							title="Copy"
+						>
+							<svg
+								class="w-4 h-4"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+								aria-hidden="true"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+								></path>
+							</svg>
+						</button>
+						<!-- Refresh Button -->
+						<button
+							type="button"
+							id="refresh-btn"
+							class="p-1.5 text-gray-400 hover:text-gray-200 transition-colors"
+							title="Regenerate"
+						>
+							<svg
+								class="w-4 h-4"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+								aria-hidden="true"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+								></path>
+							</svg>
+						</button>
+					</div>
+				</div>
+
+				<!-- Definition -->
+				<div
+					id="output"
+					class="text-sm text-gray-300 leading-relaxed mb-4"
+				></div>
+
+				<!-- Cached Indicator -->
+				<div
+					id="cached-indicator"
+					class="hidden text-xs text-yellow-500/80 mb-3 items-center gap-1"
+				>
+					<svg
+						class="w-3 h-3"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+						aria-hidden="true"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M13 10V3L4 14h7v7l9-11h-7z"
+						></path>
+					</svg>
+					<span>Cached response</span>
+				</div>
+
+				<!-- EXAMPLES Section -->
+				<div id="examples-section" class="hidden mb-4">
+					<h3
+						class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2"
+					>
+						Examples
+					</h3>
+					<div id="examples-list" class="space-y-2"></div>
+				</div>
+
+				<!-- RELATED Section -->
+				<div id="related-section" class="hidden">
+					<h3
+						class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2"
+					>
+						Related
+					</h3>
+					<div id="related-tags" class="flex flex-wrap gap-2"></div>
+				</div>
+			</div>
+
+			<!-- Empty State -->
+			<div
+				id="empty-state"
+				class="flex-1 flex items-center justify-center px-4 pb-4"
+			>
+				<p class="text-sm text-gray-500 text-center">
+					Select text on any webpage and click Explain<br>to get an AI-powered
+					explanation
+				</p>
+			</div>
+
+			<!-- Error Message -->
+			<div
+				id="error-message"
+				class="hidden mx-4 mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg"
+			>
+				<p class="text-xs text-red-400"></p>
+			</div>
+
+			<!-- History Section -->
+			<div id="history-section" class="hidden flex-1 px-4 pb-4 overflow-auto">
+				<div
+					class="flex items-center justify-between mb-3 border-b border-gray-800 pb-2"
+				>
+					<h2
+						class="text-xs font-semibold text-gray-500 uppercase tracking-wider"
+					>
+						History
+					</h2>
+					<button
+						type="button"
+						id="close-history-btn"
+						class="text-xs text-gray-400 hover:text-gray-200 transition-colors"
+					>
+						Close
+					</button>
+				</div>
+				<div id="history-list" class="space-y-2"></div>
+			</div>
+		</main>
+		<script src="dist/popup.js"></script>
+	</body>
 </html>
