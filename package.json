@@ -1,19 +1,25 @@
 {
-  "name": "ai-extension",
-  "version": "1.0.0",
-  "main": "background.js",
-  "scripts": {
-    "tailwind": "npx @tailwindcss/cli -i input.css -o index.css --watch"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "@tailwindcss/cli": "^4.1.6",
-    "tailwindcss": "^4.1.6"
-  },
-  "devDependencies": {
-    "@types/chrome": "^0.0.321"
-  }
+	"name": "explaina",
+	"version": "1.0.0",
+	"private": true,
+	"scripts": {
+		"build": "node --env-file=.env build.mjs && tailwindcss -i input.css -o index.css",
+		"dev": "node --env-file=.env build.mjs --watch",
+		"dev:css": "tailwindcss -i input.css -o index.css --watch",
+		"tailwind": "tailwindcss -i input.css -o index.css",
+		"test": "vitest run",
+		"typecheck": "biome check"
+	},
+	"dependencies": {
+		"@tailwindcss/cli": "^4.1.6",
+		"tailwindcss": "^4.1.6"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.5.2",
+		"@types/chrome": "^0.0.321",
+		"esbuild": "^0.25.0",
+		"jsdom": "^29.1.1",
+		"typescript": "^6.0.3",
+		"vitest": "^3.1.2"
+	}
 }
