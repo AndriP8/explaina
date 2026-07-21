@@ -2,13 +2,19 @@
 
 ## Overview
 
-Explaina is an AI-powered tool designed to help users understand and explain complex terms effortlessly. Simply select a word or phrase on any webpage, and Explaina provides a concise, easy-to-understand explanation by analyzing the context of the page. It is perfect for students, professionals, and lifelong learners looking to quickly grasp new concepts.
+Explaina is an AI-powered Chrome extension that explains complex terms by analyzing the context of the page you're on. Select any word or phrase, and get a concise, context-aware explanation.
 
 ## Features
 
-- **Contextual Explanation:** Get explanations for selected text with the context of the webpage.
-- **Easy to Use:** Just select text and right-click to receive an explanation.
-- **Cross Platform:** Works on all websites.
+- **Contextual Explanations:** AI explains selected text using the surrounding page content.
+- **Two entry points:** Right-click "Explain with AI" context menu, or select text and click the extension icon.
+- **Smart context extraction:** Captures nearby paragraphs (up to 2000 chars) instead of the full page.
+- **Works everywhere:** Content script injected into all websites.
+- **Streaming support:** Displays responses incrementally when the backend supports it.
+- **Retry with backoff:** Automatically retries on transient failures.
+- **Dark mode:** Adapts to your system color scheme.
+- **Keyboard shortcut:** Press `Ctrl+Shift+E` (`Cmd+Shift+E` on Mac) to open the popup.
+- **Customizable API:** Set a custom API URL via `chrome.storage.sync`.
 
 ## Installation
 
@@ -16,45 +22,68 @@ Explaina is an AI-powered tool designed to help users understand and explain com
 
    ```bash
    git clone https://github.com/yourusername/explaina.git
-   ```
-
-2. Navigate to the project directory:
-
-   ```bash
    cd explaina
    ```
 
-3. Install dependencies:
+2. Install dependencies:
 
    ```bash
-   bun install
+   pnpm install
+   pnpm approve-builds esbuild
    ```
 
-4. Generate css from tailwindcss class
+3. Build the extension:
 
    ```bash
-   bun run tailwindcss
+   pnpm run build    # compiles TypeScript src/ → dist/
+   pnpm run tailwind # compiles input.css → index.css
    ```
 
-5. Load the extension into your browser:
-   - Open Chrome and go to `chrome://extensions/`.
-   - Enable "Developer mode" in the top right corner.
-   - Click "Load unpacked" and select the `explaina` directory.
+4. Load the extension into Chrome:
+   - Open `chrome://extensions/`
+   - Enable "Developer mode"
+   - Click "Load unpacked" and select the `explaina` directory
 
 ## Usage
 
-- Select any text on a webpage.
-- Right-click and choose "Explain" from the context menu.
-- The explanation will be provided in a popup.
+- **Select text → right-click → "Explain with AI"** — quick entry from context menu.
+- **Select text → click extension icon** — popup opens with text pre-filled.
+- **Press `Ctrl+Shift+E`** — opens the popup instantly.
+- Edit the text in the popup textarea, then click **Explain**.
 
 ## Development
 
-To start the development server, install live-server extension and run `popup.html` in live-server
+```bash
+pnpm run dev    # watch mode — rebuilds on file changes
+pnpm run tailwind  # rebuild CSS after theme changes
+```
 
-## Contributing
+### Project Structure
 
-Contributions are welcome! Please fork the repository and submit a pull request for any improvements or bug fixes.
+```
+explaina/
+├── src/               # TypeScript source files
+│   ├── background.ts  # Service worker (context menu)
+│   ├── content.ts     # Content script (text selection)
+│   ├── popup.ts       # Popup UI logic
+│   └── types.ts       # Shared type definitions
+├── dist/              # Compiled JS output (gitignored)
+├── input.css          # Tailwind CSS input
+├── index.css          # Compiled CSS (gitignored)
+├── manifest.json      # Chrome extension manifest
+├── popup.html         # Popup UI
+├── tsconfig.json      # TypeScript config
+└── package.json       # Dependencies & build scripts
+```
+
+## Configuring a Custom API
+
+Set a custom endpoint via the console:
+
+```js
+chrome.storage.sync.set({ apiUrl: "https://your-server.com/api/explain" })
+```
 
 ## License
 
-This project is licensed under the ISC License.
+ISC
